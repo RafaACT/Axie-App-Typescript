@@ -1,9 +1,5 @@
 import React, { useState }from "react";
-import Dullgrip from './Dullgrip.png'
-import Choreto from './Choreto.png'
-import Shieldbreak from './Shieldbreak.png'
-import Peludito from './Peludito.png'
-import Termi from './Termi.png'
+import Navbar from "./navbar";
 
 function MMR() {
 
@@ -45,14 +41,6 @@ function MMR() {
 
   return (
     <div>
-        <div className="topnav">
-            <img className='axie' src={Dullgrip} />
-            <img className='axie' src={Choreto} />
-            <img className='axie' src={Termi} />
-            <img className='axie' src={Peludito} />
-            <img className='axie' src={Shieldbreak} />
-        </div>
-        <hr />
       <form onSubmit={getMMR}>
         <input
           className='box'

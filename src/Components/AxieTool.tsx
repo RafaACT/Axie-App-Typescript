@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ReactLoading from 'react-loading';
+import Navbar from "./navbar";
 
 function AxieTool() {
 

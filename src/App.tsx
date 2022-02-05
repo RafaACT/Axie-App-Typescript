@@ -1,13 +1,16 @@
-import React, { Key, useState } from 'react';
-import MMR from './Components/MMR'
-import AxieTool from './Components/AxieTool';
+import React from 'react';
 import './index.css'
+import Navbar from './Components/navbar';
+import { BrowserRouter as Router } from "react-router-dom";
+import Rout from './Components/Routes';
 
 function App() {
   return(
     <div>
-      <MMR />
-      <AxieTool />
+      <Router>
+        <Navbar />
+          <Rout />
+      </Router>
     </div>
   )
  
