@@ -1,5 +1,4 @@
 import React, { useState }from "react";
-import Navbar from "./navbar";
 
 function MMR() {
 
@@ -50,7 +49,7 @@ function MMR() {
           value={roninaddress}
           onChange={changeRonin}
         />
-        <button>submit</button>
+        <button>Get MMR</button>
       </form>
       <h1>{roninaddress}</h1>
       {Info === false ? null :

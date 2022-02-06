@@ -24,6 +24,9 @@ function Navbar() {
                     <Link to='/axietool' className="btn btn-dark btn-lg m-5">
                         Axie tool
                     </Link>
+                    <Link to='/cryptos' className="btn btn-dark btn-lg m-5">
+                        Cryptos
+                    </Link>
                 </div>
             </div>
         </div>
