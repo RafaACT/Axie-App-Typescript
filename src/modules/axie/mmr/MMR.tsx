@@ -1,4 +1,5 @@
 import React, { useState }from "react";
+import FetchData from "../../../api/api";
 
 function MMR() {
 
@@ -10,25 +11,23 @@ function MMR() {
     event.preventDefault()
     const URL = 'https://game-api.axie.technology/mmr/'
     const ronin = URL + roninaddress
-    fetch(ronin)
-      .then(response => response.json())
-      .then(response => {
-        setMMR(response[0].items[1])
-        setInfo(true)
-      })
+    const data = FetchData(ronin)
+    .then(data => {
+      setMMR(data)
+      setInfo(true)
+    })
   }
 
   function changeRonin(event: any){
-    const {value} = event.target
-    setRonin(value)
+    setRonin(event.target.value)
   }
 
   function message(){
     const message = ''
-    if(MMR.elo >= 1500){
+    if(MMR.items[1].elo >= 1500){
         const message = 'Que crack'
         return message
-    } else if (MMR.elo >= 1100 && MMR.elo < 1500){
+    } else if (MMR.items[1].elo >= 1100 && MMR.elo < 1500){
         const message = 'Vas por buen camino'
         return message
     } else {
@@ -40,7 +39,6 @@ function MMR() {
 
   return (
     <div>
-      <form onSubmit={getMMR}>
         <input
           className='box'
           type='text'
@@ -49,13 +47,12 @@ function MMR() {
           value={roninaddress}
           onChange={changeRonin}
         />
-        <button>Get MMR</button>
-      </form>
+        <button onClick={getMMR}>Get MMR</button>
       <h1>{roninaddress}</h1>
       {Info === false ? null :
       <div> 
-        <h1>{MMR.name}</h1>
-        <h1>{MMR.elo} MMR</h1>
+        <h1>{MMR.items[1].name}</h1>
+        <h1>{MMR.items[1].elo} MMR</h1>
         <h1>{message()}</h1>
       </div>}
     </div>

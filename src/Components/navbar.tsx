@@ -1,9 +1,9 @@
 import React from "react";
-import Dullgrip from './IMG/Dullgrip.png'
-import Choreto from './IMG/Choreto.png'
-import Shieldbreak from './IMG/Shieldbreak.png'
-import Peludito from './IMG/Peludito.png'
-import Termi from './IMG/Termi.png'
+import Dullgrip from './img/Dullgrip.png'
+import Choreto from './img/Choreto.png'
+import Shieldbreak from './img/Shieldbreak.png'
+import Peludito from './img/Peludito.png'
+import Termi from './img/Termi.png'
 import { Link } from 'react-router-dom'
 
 function Navbar() {

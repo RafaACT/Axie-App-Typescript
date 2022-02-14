@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import ReactLoading from 'react-loading';
-import Cards from "./cards";
+import Cards from "./Cards";
+import './axieTool.css'
+import FetchData from "../../../api/api";
 
 function AxieTool() {
 
     const [Axienumber, setAxienumber] = useState<number>()
     const [axieIMG, setAxieIMG] = useState<string>()
-    const [axieInfo, setAxieInfo] = useState<any>()
+    const [axieInfo, setAxieInfo] = useState<string[]>()
     const [info, setInfo] = useState<boolean>(false)
     const [charging, setCharging] = useState<boolean>(false)
 
@@ -19,34 +21,31 @@ function AxieTool() {
 
         const linkIMG = URLaxieNumber + Axienumber + URLaxieNumberEnd
         const Info = AxieInfo + Axienumber
-        fetch(Info)
-            .then(response => response.json())
-            .then (response => {
-                setAxieInfo(response)
-                setAxieIMG(linkIMG)
-                setInfo(true)
-                setCharging(false)
-            })
+        
+        const data = FetchData(Info)
+            .then(data => { 
+            setAxieInfo(data)
+            setAxieIMG(linkIMG)
+            setCharging(false)
+            setInfo(true)
+        })
     }
 
     function AxieNumber(event: any){
-        const {value} = event.target
-        setAxienumber(value)
+        setAxienumber(event.target.value)
       }
 
       return(
           <div>
-              <form onSubmit={getAxie}>
-                  <input 
-                    className='box'
-                    type='number'
-                    name='AxieNumber'
-                    placeholder='Place Axie #'
-                    value={Axienumber}
-                    onChange={AxieNumber}
-                  />
-                  <button>Get Axie</button>
-              </form>
+            <input 
+            className='box'
+            type='number'
+            name='AxieNumber'
+            placeholder='Place Axie #'
+            value={Axienumber}
+            onChange={AxieNumber}
+            />
+            <button onClick={getAxie}>Get Axie</button>
               {charging === false ? null:
                 <div>
                     <h1>LOADING...</h1>

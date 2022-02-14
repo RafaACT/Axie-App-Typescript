@@ -1,28 +1,9 @@
-import { type } from "os";
-import React, { useEffect, useState } from "react";
-import './Cryptos.css'
+import React from "react";
 
-export default function Cryptos() {
-    const [coins, setCoins] = useState<any>()
-    const [data, setData] = useState<boolean>(false)
-
-
-    useEffect(() => {
-        const api = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=249&page=1&sparkline=false'
-
-        fetch(api)
-            .then(response => response.json())
-            .then(response => {
-                setCoins(response)
-                setData(true)
-            })
-    }, [])
-
+function Currency(props:any) {
     return(
         <div>
-            {data === false ? null :
-        
-            coins.map((part: any) => 
+            {props.coins.map((part: any) => 
                 part.id !== 'bitcoin' && part.id !== 'ethereum' && part.id !== 'smooth-love-potion' && part.id !== 'axie-infinity' && part.id !=='ronin' ? null : 
                 <div className="coin-container">
                     <div className="coin-row">
@@ -42,8 +23,9 @@ export default function Cryptos() {
                         </div>
                     </div>
                 </div>
-                )
-            }
+                )}
         </div>
     )
 }
+
+export default Currency

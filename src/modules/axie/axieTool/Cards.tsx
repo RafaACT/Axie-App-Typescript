@@ -1,13 +1,13 @@
 import React from 'react'
 
-const Cards = ({axieIMG , axieInfo}) => {
+function Cards (props:any) {
     return(
     <div>
-        <img src={axieIMG} className="BigAxie" />
-        <h1 className="name">{axieInfo.name}</h1>
+        <img src={props.axieIMG} className="BigAxie" />
+        <h1 className="name">{props.axieInfo.name}</h1>
         <div className="container">
             <div className="row">
-                {axieInfo.parts.map((part) =>
+                {props.axieInfo.parts.map((part:any) =>
                 part.type == 'Ears' || part.type == 'Eyes' ? null :
                     <div className="col-sm">
                         <p className='partname'>{part.name}</p>
