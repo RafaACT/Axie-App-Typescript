@@ -6,7 +6,7 @@ import FetchData from "../../../api/api";
 
 function AxieTool() {
 
-    const [Axienumber, setAxienumber] = useState<number>()
+    const [Axienumber, setAxieNumber] = useState<number>()
     const [axieIMG, setAxieIMG] = useState<string>()
     const [axieInfo, setAxieInfo] = useState<string[]>()
     const [info, setInfo] = useState<boolean>(false)
@@ -32,7 +32,7 @@ function AxieTool() {
     }
 
     function AxieNumber(event: any){
-        setAxienumber(event.target.value)
+        setAxieNumber(event.target.value)
       }
 
       return(

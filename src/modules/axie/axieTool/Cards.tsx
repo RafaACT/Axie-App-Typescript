@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Cards (props:any) {
+function Cards (props: any) {
     return(
     <div>
         <img src={props.axieIMG} className="BigAxie" />
