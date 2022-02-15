@@ -1,13 +1,18 @@
 import React from 'react'
 
-function Cards (props: any) {
+interface Axie {
+    axieIMG: string | undefined,
+    axieInfo: string[] | undefined | any
+}
+
+export default function Cards (props: Axie) {
     return(
     <div>
         <img src={props.axieIMG} className="BigAxie" />
-        <h1 className="name">{props.axieInfo.name}</h1>
+        <h1 className="name">{props.axieInfo?.name}</h1>
         <div className="container">
             <div className="row">
-                {props.axieInfo.parts.map((part:any) =>
+                {props.axieInfo?.parts.map((part:any) =>
                 part.type == 'Ears' || part.type == 'Eyes' ? null :
                     <div className="col-sm">
                         <p className='partname'>{part.name}</p>
@@ -31,5 +36,3 @@ function Cards (props: any) {
         </div>
     </div>
     )}
-
-export default Cards

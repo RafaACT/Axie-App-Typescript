@@ -3,7 +3,7 @@ import FetchData from "../../../api/api";
 
 function MMR() {
 
-  const [MMR, setMMR] = useState<any>()
+  const [MMR, setMMR] = useState<string[] | any>()
   const [roninaddress, setRonin] = useState<string>('')
   const [Info, setInfo] = useState<boolean>(false)
 
@@ -13,7 +13,7 @@ function MMR() {
     const ronin = URL + roninaddress
     const data = FetchData(ronin)
     .then(data => {
-      setMMR(data)
+      setMMR(data[0])
       setInfo(true)
     })
   }
@@ -27,7 +27,7 @@ function MMR() {
     if(MMR.items[1].elo >= 1500){
         const message = 'Que crack'
         return message
-    } else if (MMR.items[1].elo >= 1100 && MMR.elo < 1500){
+    } else if (MMR.items[1].elo >= 1100 && MMR.items[1].elo < 1500){
         const message = 'Vas por buen camino'
         return message
     } else {
@@ -54,7 +54,8 @@ function MMR() {
         <h1>{MMR.items[1].name}</h1>
         <h1>{MMR.items[1].elo} MMR</h1>
         <h1>{message()}</h1>
-      </div>}
+      </div>
+      }
     </div>
   );
 }

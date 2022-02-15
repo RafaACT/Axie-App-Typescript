@@ -4,7 +4,7 @@ import MMR from './modules/axie/mmr/MMR'
 import AxieTool from './modules/axie/axieTool/AxieTool';
 import Cryptos from "./modules/crypto/Cryptos";
 
-export default function Rout() {
+export function Rout() {
     return(
         <div>
             <Routes>
