@@ -1,64 +1,87 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import ReactLoading from 'react-loading';
 import Cards from "./Cards";
 import './axieTool.css'
-import FetchData from "../../../api/api";
+import FetchData from "../../../api/Api";
+import { Data, Action } from "./Interfaces";
 
 function AxieTool() {
 
-    const [Axienumber, setAxieNumber] = useState<number>()
-    const [axieIMG, setAxieIMG] = useState<string>()
-    const [axieInfo, setAxieInfo] = useState<string[]>()
-    const [info, setInfo] = useState<boolean>(false)
-    const [charging, setCharging] = useState<boolean>(false)
+    const initialState:Data = {
+        axieIMG: '',
+        axieInfo: [],
+        info: false,
+        loading: false
+    }
 
-    function getAxie(event: any){
+    const reducer = (state: Data, action:Action<any>) => {
+        switch (action.type) {
+            default:
+                return state
+    
+            case 'FETCH_SUCCESS':
+                return {
+                    loading: false,
+                    axieInfo: action.payload,
+                    axieIMG: action.payload2,
+                    info: true
+                }
+    
+            case 'FETCH_PENDING':
+                return {
+                    ...state,
+                    loading: true,
+                    info: false
+                }
+        }
+    }
+
+    function AxieNumber(event:any){
+        setAxieNumber(event.target.value)
+      }
+
+    const[axieNumber, setAxieNumber] = useState<number>()
+    const[state, dispatch] = useReducer(reducer, initialState)
+
+    function getAxie(event:any) {
         event.preventDefault()
-        setCharging(true)
+        dispatch({type: 'FETCH_PENDING'})
         const URLaxieNumber = 'https://assets.axieinfinity.com/axies/'
         const URLaxieNumberEnd = '/axie/axie-full-transparent.png'
         const AxieInfo = 'https://api.axie.technology/getaxies/'
 
-        const linkIMG = URLaxieNumber + Axienumber + URLaxieNumberEnd
-        const Info = AxieInfo + Axienumber
-        
+        const linkIMG = URLaxieNumber + axieNumber + URLaxieNumberEnd
+        const Info = AxieInfo + axieNumber
+
         const data = FetchData(Info)
-            .then(data => { 
-            setAxieInfo(data)
-            setAxieIMG(linkIMG)
-            setCharging(false)
-            setInfo(true)
-        })
+            .then(data => {
+                dispatch({...state, type: 'FETCH_SUCCESS', payload: data, payload2: linkIMG})
+            })
     }
-
-    function AxieNumber(event: any){
-        setAxieNumber(event.target.value)
-      }
-
-      return(
-          <div>
-            <input 
-            className='box'
-            type='number'
-            name='AxieNumber'
-            placeholder='Place Axie #'
-            value={Axienumber}
-            onChange={AxieNumber}
-            />
-            <button onClick={getAxie}>Get Axie</button>
-              {charging === false ? null:
-                <div>
-                    <h1>LOADING...</h1>
-                    <ReactLoading type="balls" color="black" 
-                    height={1000} width={500} className='charging'/>
-                </div>}
-              {info === false ? null : 
-              <div>
-                  <Cards axieIMG={axieIMG} axieInfo={axieInfo}/>
-              </div>
-              }
-          </div>
-      )
+    return(
+        <div>
+        <input 
+        className='box'
+        type='number'
+        name='AxieNumber'
+        placeholder='Place Axie #'
+        value={axieNumber}
+        onChange={AxieNumber}
+        />
+        <button onClick={getAxie}>Get Axie</button>
+            {state.loading === false ? null:
+            <div>
+                <h1>LOADING...</h1>
+                <ReactLoading type="balls" color="black" 
+                height={1000} width={500} className='charging'/>
+            </div>}
+            {state.info === false ? null : 
+            <div>
+                <Cards axieIMG={state.axieIMG} axieInfo={state.axieInfo}/>
+            </div>
+            }
+        </div>
+    )
 }
 
 export default AxieTool

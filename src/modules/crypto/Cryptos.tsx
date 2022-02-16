@@ -1,6 +1,6 @@
 import { type } from "os";
 import React, { useEffect, useState } from "react";
-import FetchData from "../../api/api";
+import FetchData from "../../api/Api";
 import Currency from "./AxieCurrency";
 import './Cryptos.css'
 import ReactLoading from 'react-loading';

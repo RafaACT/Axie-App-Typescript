@@ -1,8 +1,8 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import MMR from './modules/axie/mmr/MMR'
-import AxieTool from './modules/axie/axieTool/AxieTool';
 import Cryptos from "./modules/crypto/Cryptos";
+import AxieTool from "./modules/axie/axieTool/AxieTool";
 
 export function Rout() {
     return(

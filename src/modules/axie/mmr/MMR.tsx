@@ -1,5 +1,5 @@
 import React, { useState }from "react";
-import FetchData from "../../../api/api";
+import FetchData from "../../../api/Api";
 
 function MMR() {
 
