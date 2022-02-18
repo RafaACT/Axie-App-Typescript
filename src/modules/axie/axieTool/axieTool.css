@@ -20,6 +20,8 @@
     margin: auto;
     width: 200px;
     height: 300px;
+    box-shadow: 0 0 12px 6px #000;
+    border: black solid 1px;
   }
   
   .partname{

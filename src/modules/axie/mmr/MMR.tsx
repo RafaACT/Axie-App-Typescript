@@ -52,11 +52,13 @@ function MMR() {
         <button onClick={getMMR}>Get MMR</button>
       <h1>{roninaddress}</h1>
       {Info === false ? null :
-      <div> 
-        <h1 className="MMR1" >{MMR.items[1].name}</h1>
-        <h1 className="MMR2">{MMR.items[1].elo} MMR</h1>
-        <h1 className="MMR1">{message()}</h1>
-      </div>
+        roninaddress.length !== 46 ? 
+        <h1>Place a valid Ronin Address</h1>:
+          <div> 
+            <h1 className="MMR1" >{MMR.items[1].name}</h1>
+            <h1 className="MMR2">{MMR.items[1].elo} MMR</h1>
+            <h1 className="MMR1">{message()}</h1>
+          </div>
       }
     </div>
   );
