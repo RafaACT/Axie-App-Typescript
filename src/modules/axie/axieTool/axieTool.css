@@ -1,12 +1,19 @@
-.BigAxie{
+.containBigAxie{
+  display: grid;
+  height: 100%;
+}
 
-    max-width: 50%;
-    max-height: 100vh;
+.BigAxie{
+    animation: Axie 2s ease-in;
+    object-fit: none;
+    width: 800px;
+    height: 600px;
     margin: auto;
   }
   
   .name{
     font-size: 2.5em;
+    animation: Axie 2s ease-in;
   }
   
   .card{
@@ -130,4 +137,27 @@
     left: 10px;
     width: 30px;
     height: 45px;
+  }
+
+  .col-sm{
+    animation-name: cards;
+    animation-duration: 2s;
+  }
+
+  @keyframes cards {
+    0%{
+      transform: translateY(100%);
+    }
+    100%{
+      transform: translateY(0%);
+    }
+  } 
+
+  @keyframes Axie {
+    0% {
+      opacity: 0%;
+    }
+    100%{
+      opacity: 100%;
+    }
   }

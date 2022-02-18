@@ -1,0 +1,45 @@
+.MMR1{
+    animation-name: right-to-left;
+    animation-duration: 4s;
+    color: black;
+    width:fit-content;
+    margin: auto;
+    margin-bottom: 5px;
+}
+
+@keyframes right-to-left {
+    0% {
+        background-color: black;
+        transform: translateX(1000%);
+    }
+    50%{
+        transform: translateX(0%);
+        background-color: black;
+    }
+    100%{
+        background-color: black 0%;
+    }
+}
+
+.MMR2{
+    animation-name: left-to-right;
+    animation-duration: 4s;
+    color: black;
+    width:fit-content;
+    margin: auto;
+    margin-bottom: 5px;
+}
+
+@keyframes left-to-right {
+    0% {
+        background-color: black;
+        transform: translateX(-1000%);
+    }
+    50%{
+        transform: translateX(0%);
+        background-color: black;
+    }
+    100%{
+        background-color: black 0%;
+    }
+}

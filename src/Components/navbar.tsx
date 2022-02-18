@@ -5,16 +5,17 @@ import Shieldbreak from './img/Shieldbreak.png'
 import Peludito from './img/Peludito.png'
 import Termi from './img/Termi.png'
 import { Link } from 'react-router-dom'
+import Welcome from "../modules/welcome/Welcome";
 
 function Navbar() {
     return(
         <div>
             <div className="topnav">
-                <img className='axie' src={Dullgrip} />
-                <img className='axie' src={Choreto} />
-                <img className='axie' src={Termi} />
-                <img className='axie' src={Peludito} />
-                <img className='axie' src={Shieldbreak} />
+                <a href='http://localhost:3000/'><img className='axie' src={Dullgrip} /></a>
+                <a href='http://localhost:3000/'><img className='axie' src={Choreto} /></a>
+                <a href='http://localhost:3000/'><img className='axie' src={Termi} /></a>
+                <a href='http://localhost:3000/'><img className='axie' src={Peludito} /></a>
+                <a href='http://localhost:3000/'><img className='axie' src={Shieldbreak} /></a>
             </div>
             <div className="container">
                 <div className="btn-group">

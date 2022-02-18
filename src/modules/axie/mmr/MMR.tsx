@@ -1,5 +1,6 @@
 import React, { useState }from "react";
 import FetchData from "../../../api/Api";
+import './MMR.css'
 
 function MMR() {
 
@@ -9,6 +10,7 @@ function MMR() {
 
   function getMMR(event: any){
     event.preventDefault()
+    setInfo(false)
     const URL = 'https://game-api.axie.technology/mmr/'
     const ronin = URL + roninaddress
     const data = FetchData(ronin)
@@ -51,9 +53,9 @@ function MMR() {
       <h1>{roninaddress}</h1>
       {Info === false ? null :
       <div> 
-        <h1>{MMR.items[1].name}</h1>
-        <h1>{MMR.items[1].elo} MMR</h1>
-        <h1>{message()}</h1>
+        <h1 className="MMR1" >{MMR.items[1].name}</h1>
+        <h1 className="MMR2">{MMR.items[1].elo} MMR</h1>
+        <h1 className="MMR1">{message()}</h1>
       </div>
       }
     </div>

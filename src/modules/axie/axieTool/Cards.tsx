@@ -8,7 +8,11 @@ interface Axie {
 export default function Cards (props: Axie) {
     return(
     <div>
-        <img src={props.axieIMG} className="BigAxie" />
+        <div className='container'>
+            <div className='containBigAxie'>
+                <img src={props.axieIMG} className="BigAxie" />
+            </div>
+        </div>
         <h1 className="name">{props.axieInfo?.name}</h1>
         <div className="container">
             <div className="row">
