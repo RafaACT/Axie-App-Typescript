@@ -1,12 +1,12 @@
 import { type } from "os";
 import React, { useEffect, useState } from "react";
-import FetchData from "../../api/Api";
-import Currency from "./AxieCurrency";
-import './Cryptos.css'
+import FetchData from "../../../api/Api";
+import Currency from "../components/AxieCurrency";
+import '../css/Cryptos.css'
 import ReactLoading from 'react-loading';
-import Currency2 from "./FilteredCurrency";
+import Currency2 from "../components/FilteredCurrency";
 
-export default function Cryptos() {
+export const Cryptos = () => {
     const [coins, setCoins] = useState<string[]>()
     const [data, setData] = useState<boolean>(false)
     const [search, setSearch] = useState<string>('')
@@ -26,7 +26,7 @@ export default function Cryptos() {
         coins?.filter((coin: any) => 
         coin.name.toLowerCase().includes(search?.toLowerCase()))
 
-    function Search(event: any){
+    function HandleSearch(event: React.ChangeEvent<HTMLInputElement>){
         setSearch(event.target.value)
     }   
     
@@ -46,7 +46,7 @@ export default function Cryptos() {
             placeholder="Search"
             className="box"
             value={search}
-            onChange={Search}
+            onChange={HandleSearch}
             />
 
             {search === '' ? null : 

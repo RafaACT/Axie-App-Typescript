@@ -1,0 +1,1 @@
+export { MMR as default } from './pages/MMR';

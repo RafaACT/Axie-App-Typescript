@@ -1,14 +1,14 @@
 import React, { useState }from "react";
-import FetchData from "../../../api/Api";
-import './MMR.css'
+import FetchData from "../../../../api/Api";
+import '../css/MMR.css'
 
-function MMR() {
+export const MMR = () => {
 
   const [MMR, setMMR] = useState<string[] | any>()
   const [roninaddress, setRonin] = useState<string>('')
   const [Info, setInfo] = useState<boolean>(false)
 
-  function getMMR(event: any){
+  function getMMR(event: React.MouseEvent<HTMLElement>){
     event.preventDefault()
     setInfo(false)
     const URL = 'https://game-api.axie.technology/mmr/'
@@ -20,7 +20,7 @@ function MMR() {
     })
   }
 
-  function changeRonin(event: any){
+  function HandleRonin(event: React.ChangeEvent<HTMLInputElement>){
     setRonin(event.target.value)
   }
 
@@ -47,7 +47,7 @@ function MMR() {
           name='roninaddress'
           placeholder='Enter Ronin address'
           value={roninaddress}
-          onChange={changeRonin}
+          onChange={HandleRonin}
         />
         <button onClick={getMMR}>Get MMR</button>
       <h1>{roninaddress}</h1>
@@ -63,5 +63,3 @@ function MMR() {
     </div>
   );
 }
-
-export default MMR

@@ -1,17 +1,19 @@
 import React, { useState, useReducer } from "react";
 import ReactLoading from 'react-loading';
-import Cards from "./Cards";
-import './axieTool.css'
-import FetchData from "../../../api/Api";
-import { Data, Action } from "./Interfaces";
+import Cards from "../components/Cards";
+import '../css/AxieTool.css'
+import FetchData from "../../../../api/Api";
+import { Data, Action } from "../interfaces/Interfaces";
+import UseFetch from "../../../../api/UseFetch";
 
-function AxieTool() {
+export const AxieTool =  () => {
 
     const initialState:Data = {
         axieIMG: '',
         axieInfo: [],
         info: false,
-        loading: false
+        loading: false,
+        error: false
     }
 
     const reducer = (state: Data, action:Action<any>) => {
@@ -24,28 +26,36 @@ function AxieTool() {
                     loading: false,
                     axieInfo: action.payload,
                     axieIMG: action.payload2,
-                    info: true
+                    info: true,
+                    error: false
                 }
     
             case 'FETCH_PENDING':
                 return {
                     ...state,
                     loading: true,
-                    info: false
+                    info: false,
+                    error: false
+                }
+            case 'FETCH_ERROR':
+                return {
+                    ...state,
+                    loading: false,
+                    info: false,
+                    error: true
                 }
         }
     }
 
-    function AxieNumber(event:any){
-        setAxieNumber(event.target.value)
+    function HandleAxieNumber(event: React.ChangeEvent<HTMLInputElement>){
+        setAxieNumber(parseInt (event.target.value))
       }
 
     const[axieNumber, setAxieNumber] = useState<number>()
     const[state, dispatch] = useReducer(reducer, initialState)
 
-    function getAxie(event:any) {
+    const getAxie = (event: React.MouseEvent<HTMLElement>) => {
         event.preventDefault()
-        dispatch({type: 'FETCH_PENDING'})
         const URLaxieNumber = 'https://assets.axieinfinity.com/axies/'
         const URLaxieNumberEnd = '/axie/axie-full-transparent.png'
         const AxieInfo = 'https://api.axie.technology/getaxies/'
@@ -53,10 +63,16 @@ function AxieTool() {
         const linkIMG = URLaxieNumber + axieNumber + URLaxieNumberEnd
         const Info = AxieInfo + axieNumber
 
-        const data = FetchData(Info)
-            .then(data => {
-                dispatch({...state, type: 'FETCH_SUCCESS', payload: data, payload2: linkIMG})
-            })
+        const data = async() => {
+            dispatch({type: 'FETCH_PENDING'})
+            const data = await FetchData(Info)
+            if (data === 'error') {
+                dispatch({type: 'FETCH_ERROR'})
+                throw('ERROR')
+            }
+            dispatch({...state, type: 'FETCH_SUCCESS', payload: data, payload2: linkIMG})
+        } 
+        data()
     }
     return(
         <div>
@@ -66,7 +82,7 @@ function AxieTool() {
         name='AxieNumber'
         placeholder='Place Axie #'
         value={axieNumber}
-        onChange={AxieNumber}
+        onChange={HandleAxieNumber}
         />
         <button onClick={getAxie}>Get Axie</button>
             {state.loading === false ? null:
@@ -80,8 +96,11 @@ function AxieTool() {
                 <Cards axieIMG={state.axieIMG} axieInfo={state.axieInfo}/>
             </div>
             }
+            {state.error === false ? null :
+            <div>
+                <h1>Invalid Axie</h1>
+            </div>
+            }
         </div>
     )
 }
-
-export default AxieTool

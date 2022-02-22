@@ -1,7 +1,7 @@
 import React from "react";
-import './Welcome.css'
+import '../css/Welcome.css'
 
-function Welcome() {
+export const Welcome = () => {
     return(
         <div>
             <div className="container">
@@ -16,5 +16,3 @@ function Welcome() {
         </div>
     )
 }
-
-export default Welcome
