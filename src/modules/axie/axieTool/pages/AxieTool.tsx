@@ -1,10 +1,9 @@
 import React, { useState, useReducer } from "react";
 import ReactLoading from 'react-loading';
-import Cards from "../components/Cards";
+import { Cards } from "../components/Cards";
 import '../css/AxieTool.css'
-import FetchData from "../../../../api/Api";
+import { useFetchData } from "../../../../api/useFetch";
 import { Data, Action } from "../interfaces/Interfaces";
-import UseFetch from "../../../../api/UseFetch";
 
 export const AxieTool =  () => {
 
@@ -47,7 +46,7 @@ export const AxieTool =  () => {
         }
     }
 
-    function HandleAxieNumber(event: React.ChangeEvent<HTMLInputElement>){
+    const HandleAxieNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
         setAxieNumber(parseInt (event.target.value))
       }
 
@@ -65,7 +64,7 @@ export const AxieTool =  () => {
 
         const data = async() => {
             dispatch({type: 'FETCH_PENDING'})
-            const data = await FetchData(Info)
+            const data = await useFetchData(Info)
             if (data === 'error') {
                 dispatch({type: 'FETCH_ERROR'})
                 throw('ERROR')

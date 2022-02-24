@@ -1,13 +1,18 @@
 import React, { useEffect, useReducer } from "react";
 
-const createInitialState = (initialState) => ({
-    loading: true,
-    error:false,
-    data: [],
-    info: false
-})
+interface Data {
+    loading: boolean,
+    error: boolean,
+    data: string[],
+    info: boolean
+}
 
-const reducer = (state, action) => {
+export type Action<T> =
+|   { type: 'FETCH_SUCCESS'; payload: T}
+|   { type: 'FETCH_PENDING' }
+|   { type: 'FETCH_ERROR' }
+
+const reducer = (state:Data, action:Action<any>) => {
     switch (action.type) {
         case 'FETCH_SUCCESS':
             return {
@@ -37,11 +42,18 @@ const reducer = (state, action) => {
     }
 }
 
-const UseFetch = (endpoint, initialState) => {
-    const[state, dispatch] = useReducer(reducer, createInitialState(initialState))
+export const useFetch = (endpoint:string) => {
+    const initialState:Data = {
+        loading: true,
+        error:false,
+        data: [],
+        info: false
+    }
+
+    const[state, dispatch] = useReducer(reducer, initialState)
 
     useEffect(() => {
-        const FetchData = async() => {
+        const FetchData = async(): Promise<any> => {
             dispatch({type: 'FETCH_PENDING'})
             try {
                 const response = await fetch(endpoint);
@@ -61,5 +73,3 @@ const UseFetch = (endpoint, initialState) => {
 
     return state
 }
-
-export default UseFetch

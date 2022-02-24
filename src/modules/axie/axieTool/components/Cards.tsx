@@ -1,7 +1,7 @@
 import React from 'react'
 import { Part, Axie } from '../interfaces/Interfaces'
 
-export default function Cards (props: Axie) {
+export const Cards = (props: Axie) => {
     return(
     <div>
         <div className='container'>
@@ -36,3 +36,4 @@ export default function Cards (props: Axie) {
         </div>
     </div>
     )}
+

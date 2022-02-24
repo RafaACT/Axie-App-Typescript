@@ -6,7 +6,7 @@ import Peludito from './assets/Peludito.png'
 import Termi from './assets/Termi.png'
 import { Link } from 'react-router-dom'
 
-function Navbar() {
+const Navbar = () => {
     return(
         <div>
             <div className="topnav">

@@ -1,5 +1,5 @@
 
-const FetchData = async(url:string): Promise<any> => {
+export const useFetchData = async(url:string): Promise<any> => {
   try {
     const response = await fetch(url);
       const data = await response.json();
@@ -8,5 +8,3 @@ const FetchData = async(url:string): Promise<any> => {
     return 'error'
   }
 }
-
-export default FetchData

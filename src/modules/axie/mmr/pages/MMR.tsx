@@ -1,10 +1,12 @@
 import React, { useState }from "react";
-import FetchData from "../../../../api/Api";
+import { useFetchData } from "../../../../api/useFetch";
 import '../css/MMR.css'
+import { message } from "../components/Message";
+import { MMRinterface } from "../interfaces/Interfaces";
 
 export const MMR = () => {
 
-  const [MMR, setMMR] = useState<string[] | any>()
+  const [MMR, setMMR] = useState<MMRinterface>()
   const [roninaddress, setRonin] = useState<string>('')
   const [Info, setInfo] = useState<boolean>(false)
 
@@ -13,31 +15,21 @@ export const MMR = () => {
     setInfo(false)
     const URL = 'https://game-api.axie.technology/mmr/'
     const ronin = URL + roninaddress
-    const data = FetchData(ronin)
-    .then(data => {
-      setMMR(data[0])
-      setInfo(true)
-    })
+    const data = async() => {
+      const data = await useFetchData(ronin)
+      console.log(data)
+        if (data === 'error') {
+          throw ('ERROR')
+        }
+        setMMR(data[0])
+        setInfo(true)
+    }
+    data()
   }
 
   function HandleRonin(event: React.ChangeEvent<HTMLInputElement>){
     setRonin(event.target.value)
   }
-
-  function message(){
-    const message = ''
-    if(MMR.items[1].elo >= 1500){
-        const message = 'Que crack'
-        return message
-    } else if (MMR.items[1].elo >= 1100 && MMR.items[1].elo < 1500){
-        const message = 'Vas por buen camino'
-        return message
-    } else {
-        const message = 'Manco'
-        return message
-    }
-
-}
 
   return (
     <div>
@@ -52,12 +44,12 @@ export const MMR = () => {
         <button onClick={getMMR}>Get MMR</button>
       <h1>{roninaddress}</h1>
       {Info === false ? null :
-        roninaddress.length !== 46 ? 
-        <h1>Place a valid Ronin Address</h1>:
+      roninaddress.length !== 46 ?
+      <h1>Place a valid Ronin Address</h1> :
           <div> 
-            <h1 className="MMR1" >{MMR.items[1].name}</h1>
-            <h1 className="MMR2">{MMR.items[1].elo} MMR</h1>
-            <h1 className="MMR1">{message()}</h1>
+            <h1 className="MMR1" >{MMR?.items[1].name}</h1>
+            <h1 className="MMR2">{MMR?.items[1].elo} MMR</h1>
+            <h1 className="MMR1">{message(MMR)}</h1>
           </div>
       }
     </div>

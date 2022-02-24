@@ -7,7 +7,7 @@ const Cryptos = lazy(() => import('./modules/crypto/ExportCryptos'))
 const AxieTool = lazy(() => import('./modules/axie/axieTool/ExportAxieTool'))
 const MMR = lazy(() => import('./modules/axie/mmr/ExportMMR'))
 
-export function Routes() {
+export const Routes = () => {
     return(
         <Suspense fallback={<div>                
             <h1>LOADING...</h1>

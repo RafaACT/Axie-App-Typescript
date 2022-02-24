@@ -1,9 +1,10 @@
 import React from "react";
+import { Cryptos } from "../interfaces/Interfaces";
 
-function Currency(props:any) {
+export const Currency = (props:any) => {
     return(
         <div>
-            {props.coins.map((part: any) => 
+            {props.coins.map((part: Cryptos) => 
                 part.id !== 'bitcoin' && part.id !== 'ethereum' && part.id !== 'smooth-love-potion' && part.id !== 'axie-infinity' && part.id !=='ronin' ? null : 
                 <div className="coin-container">
                     <div className="coin-row">
@@ -27,5 +28,3 @@ function Currency(props:any) {
         </div>
     )
 }
-
-export default Currency
