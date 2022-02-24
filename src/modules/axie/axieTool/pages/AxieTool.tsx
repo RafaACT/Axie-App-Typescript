@@ -2,7 +2,7 @@ import React, { useState, useReducer } from "react";
 import ReactLoading from 'react-loading';
 import { Cards } from "../components/Cards";
 import '../css/AxieTool.css'
-import { useFetchData } from "../../../../api/useFetch";
+import { FetchData } from "../../../../api/Fetch";
 import { Data, Action } from "../interfaces/Interfaces";
 
 export const AxieTool =  () => {
@@ -64,7 +64,7 @@ export const AxieTool =  () => {
 
         const data = async() => {
             dispatch({type: 'FETCH_PENDING'})
-            const data = await useFetchData(Info)
+            const data = await FetchData(Info)
             if (data === 'error') {
                 dispatch({type: 'FETCH_ERROR'})
                 throw('ERROR')

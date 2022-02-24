@@ -1,5 +1,5 @@
 import React, { useState }from "react";
-import { useFetchData } from "../../../../api/useFetch";
+import { FetchData } from "../../../../api/Fetch";
 import '../css/MMR.css'
 import { message } from "../components/Message";
 import { MMRinterface } from "../interfaces/Interfaces";
@@ -16,7 +16,7 @@ export const MMR = () => {
     const URL = 'https://game-api.axie.technology/mmr/'
     const ronin = URL + roninaddress
     const data = async() => {
-      const data = await useFetchData(ronin)
+      const data = await FetchData(ronin)
       console.log(data)
         if (data === 'error') {
           throw ('ERROR')
